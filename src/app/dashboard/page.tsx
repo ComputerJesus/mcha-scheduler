@@ -1,11 +1,8 @@
-import { UserButton } from "@clerk/nextjs"
+import { currentUser } from '@clerk/nextjs';
+ 
+export default async function Page() {
+  const user = await currentUser();
+ 
+  if (!user) return <div>Not logged in</div>;
 
-export default function dashboard() {
-    return (
-      <div className="h-screen">
-        <UserButton afterSignOutUrl="/"/>
-        <h1>Dashboard</h1>
-      </div>
-      
-    )
-  }
+  return <div>Hello {JSON.stringify(user?.publicMetadata)}</div>;}
