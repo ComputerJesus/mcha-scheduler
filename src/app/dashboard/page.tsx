@@ -1,8 +1,13 @@
 import { currentUser } from '@clerk/nextjs';
- 
+import { redirect } from 'next/navigation'
+
+
 export default async function Page() {
   const user = await currentUser();
- 
-  if (!user) return <div>Not logged in</div>;
+  console.log(user?.firstName + " " + user?.lastName + " Tried to access dashboard, Got : " + user?.publicMetadata.isAllowed);
 
-  return <div>Hello {JSON.stringify(user?.publicMetadata)}</div>;}
+  if (user?.publicMetadata.isAllowed !== true) {
+    console.log(user?.firstName + " " + user?.lastName + " Was Redirected, Got :  " + user?.publicMetadata.isAllowed);
+    redirect("/unauth")
+  }
+}
