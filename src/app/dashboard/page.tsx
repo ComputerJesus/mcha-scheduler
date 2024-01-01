@@ -2,7 +2,7 @@ import { currentUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation'
 
 
-export default async function Page() {
+export default async function auth() {
   const user = await currentUser();
   console.log(user?.firstName + " " + user?.lastName + " Tried to access dashboard, Got : " + user?.publicMetadata.isAllowed);
 
