@@ -1,11 +1,27 @@
-import { UserButton } from "@clerk/nextjs";
- 
-export default function Home() {
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
+import Link from "next/link";
+export default async function Home() {
+
+
   return (
-    <div className="h-screen">
-      <UserButton afterSignOutUrl="/"/>
-      <h1>Home</h1>
-    </div>
+    <main>
+    <header style={{ display: "flex", justifyContent: "space-between", padding: 20 }}>
+      <h1 className="text-3xl">Mcha Scheduler</h1>
+      <SignedIn>
+        {/* Mount the UserButton component */}
+        <UserButton />
+      </SignedIn>
+      <SignedOut>
+        {/* Signed out users get sign in button */}
+        <SignInButton afterSignInUrl="/dashboard">
+          <button className="bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sign in</button>
+        </SignInButton>
+      </SignedOut>
+    </header>
+
+    <body>
     
+    </body>
+    </main>
   )
 }
